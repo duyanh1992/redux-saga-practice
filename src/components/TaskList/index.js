@@ -12,18 +12,18 @@ class TaskList extends Component {
   render() {
     const { classes } = this.props;
 
-		return (
-			titles.map((title, index) => (
-				<Grid item md={4} key={index}>
-					<Box mt={3} mb={3}>
-						<b className={classes.textCapitalize}>{title.label}</b>
-					</Box>
+	return (
+		titles.map((title, index) => (
+			<Grid item md={4} key={index}>
+				<Box mt={3} mb={3}>
+					<b className={classes.textCapitalize}>{title.label}</b>
+				</Box>
 
-          <TaskItem value={title.value} />
-				</Grid>
-				)
+  				<TaskItem value={title.value} />
+			</Grid>
 			)
 		)
+	)
   }
 }
 
