@@ -11,7 +11,7 @@ import {
 
 class TaskItem extends Component {
   render() {
-    const { value } = this.props;
+    const { value, tasks} = this.props;
 
 		return (
       tasks.filter(task => task.status === value).map((task, value) => (

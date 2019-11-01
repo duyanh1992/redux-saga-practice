@@ -10,7 +10,7 @@ import {
 
 class TaskList extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, tasks } = this.props;
 
 	return (
 		titles.map((title, index) => (
@@ -19,7 +19,7 @@ class TaskList extends Component {
 					<b className={classes.textCapitalize}>{title.label}</b>
 				</Box>
 
-  				<TaskItem value={title.value} />
+  				<TaskItem tasks={tasks} value={title.value} />
 			</Grid>
 			)
 		)
