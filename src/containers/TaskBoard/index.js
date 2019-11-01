@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Add } from '@material-ui/icons';
 import TaskList from '../../components/TaskList/index';
 import TaskForm from '../../components/TaskForm/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as taskActions from './../../actions/task';
 import {
 	Button,
 	Grid,
@@ -17,6 +20,13 @@ class TaskBoard extends Component {
 		this.setItem = this.setItem.bind(this);
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+	}
+
+	componentDidMount() {
+		const { taskAct } = this.props;
+		const { fetchTaskRequest } = taskAct;
+
+		fetchTaskRequest();
 	}
 
 	setItem(name, value) {
@@ -35,21 +45,39 @@ class TaskBoard extends Component {
 
 	render() {
 		const { openDialog } = this.state;
+		const { tasks } = this.props;
 
-		return (
-			<div className="main">
-				<Button onClick={this.openModal} variant="contained" color="primary">
-					<Add /> add new task
-				</Button>
+		if (tasks.length > 0) {
+			return (
+				<div className="main">
+					<Button onClick={this.openModal} variant="contained" color="primary">
+						<Add /> add new task
+					</Button>
 
-				<Grid container spacing={3}>
-          <TaskList />
-				</Grid>
+					<Grid container spacing={3}>
+	          			<TaskList tasks={tasks} />
+					</Grid>
 
-				<TaskForm openDialog={openDialog} closeModal={this.closeModal} />
-			</div>
-		);
+					<TaskForm openDialog={openDialog} closeModal={this.closeModal} />
+				</div>
+			);
+		}
+
+		return '';
 	}
 }
 
-export default TaskBoard;
+const mapStateToProps = state => {
+	console.log(state.task);
+	return {
+		tasks: state.task.list
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		taskAct: bindActionCreators(taskActions, dispatch)
+	}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskBoard);
