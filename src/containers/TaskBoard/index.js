@@ -24,9 +24,9 @@ class TaskBoard extends Component {
 
 	componentDidMount() {
 		const { taskAct } = this.props;
-		const { fetchTaskRequest } = taskAct;
+		const { fetchTaskFirst } = taskAct;
 
-		fetchTaskRequest();
+		fetchTaskFirst();
 	}
 
 	setItem(name, value) {
@@ -68,7 +68,6 @@ class TaskBoard extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state.task);
 	return {
 		tasks: state.task.list
 	};
